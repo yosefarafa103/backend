@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    width: 65%;
+    margin: auto;
+}
+
+body {
+    direction: rtl;
+}
+
+/* 
+*/
+.section-title {
+    margin-top: 20px;
+    color: #00b4d8;
+    font-size: 16px;
+}
+
+.section-header {
+    background-color: royalblue;
+    padding: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & h2 {
+        font-size: 16px;
+    }
+}
+
+@media (width < 550px) {
+    main {
+        width: 100%;
+
+    }
+}

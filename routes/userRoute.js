@@ -1,0 +1,11 @@
+const express = require("express");
+const { createUser, login } = require("../Controller/usersController");
+const { getDocument } = require("../utils/mainFunctions");
+const User = require("./../models/usersModel");
+const validateToken = require("../middleware/validateToken");
+const router = express.Router();
+router.route("/").post(createUser);
+router.post("/login", login);
+// router.use(validateToken);
+router.route("/:id").get(getDocument(User));
+module.exports = router;
