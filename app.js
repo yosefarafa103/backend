@@ -12,7 +12,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 dotenv.config();
 
-const db = process.env.db.replace("<db_password>", process.env.db_password);
+const db = process.env.DB.replace("<db_password>", process.env.DB_PASSWORD);
 app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "public"));
