@@ -7,6 +7,7 @@ const documentRoute = require("./routes/documentsRoute");
 const sectionRouter = require("./routes/sectionsRoute");
 const userRouter = require("./routes/userRoute");
 const { join } = require("path");
+const compression = require("compression");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 dotenv.config();
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
   // console.log(res.cookie);
   next();
 });
+app.use(compression());
 app.use("/api/users", userRouter);
 app.use("/api/documents/", documentRoute);
 app.use("/api/sections/", sectionRouter);
