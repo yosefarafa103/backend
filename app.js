@@ -38,7 +38,11 @@ app.use((req, res, next) => {
   next();
 });
 app.use(compression());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use("/", (req, res) => res.send("this is home page"));
 app.use("/api/users", userRouter);
