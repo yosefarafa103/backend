@@ -16,7 +16,6 @@ const db = process.env.DB.replace("<db_password>", process.env.DB_PASSWORD);
 app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "public"));
-
 mongoose
   .connect(db)
   .then(() => {
@@ -32,13 +31,16 @@ app.get("/", (req, res) => {
     page: "home page",
   });
 });
-app.use(cors({ origin: "https://localhost:5173" }));
+// app.use(cors());
 app.use(cookieParser());
 app.use((req, res, next) => {
   // console.log(res.cookie);
   next();
 });
 app.use(compression());
+app.use(cors());
+
+app.use("/", (req, res) => res.send("this is home page"));
 app.use("/api/users", userRouter);
 app.use("/api/documents/", documentRoute);
 app.use("/api/sections/", sectionRouter);
