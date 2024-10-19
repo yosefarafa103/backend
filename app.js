@@ -11,6 +11,7 @@ const compression = require("compression");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 dotenv.config();
+app.use(cors());
 
 const db = process.env.DB.replace("<db_password>", process.env.DB_PASSWORD);
 app.use(express.json());
@@ -31,20 +32,13 @@ app.get("/", (req, res) => {
     page: "home page",
   });
 });
-// app.use(cors());
 app.use(cookieParser());
 app.use((req, res, next) => {
   // console.log(res.cookie);
   next();
 });
 app.use(compression());
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 
-app.use("/", (req, res) => res.send("this is home page"));
 app.use("/api/users", userRouter);
 app.use("/api/documents/", documentRoute);
 app.use("/api/sections/", sectionRouter);
