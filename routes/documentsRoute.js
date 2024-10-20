@@ -5,12 +5,16 @@ const {
   getDocumentsInSection,
 } = require("./../Controller/documentController");
 const DocumentModel = require("../models/documentsModel");
-const { updateDocument, deleteDocument } = require("../utils/mainFunctions");
+const {
+  updateDocument,
+  deleteDocument,
+  getAllDocuments,
+} = require("../utils/mainFunctions");
 const { getAllDocs } = require("../Controller/viewsController");
 const router = express.Router();
 
 router.post("/new", createDocument);
-router.get("/", getAllDocs);
+router.get("/", getAllDocuments(DocumentModel));
 router.patch("/:id", updateDocument(DocumentModel));
 router.get("/:id", findDocument);
 router.delete("/:id", deleteDocument(DocumentModel));

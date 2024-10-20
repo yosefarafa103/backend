@@ -10,6 +10,7 @@ const getAllDocuments = (model) => async (req, res, next) => {
   try {
     const docs = await model.find();
     console.log(docs);
+    res.status(200).json(docs);
   } catch (err) {
     return next(err);
   }
@@ -40,10 +41,16 @@ const deleteDocument = (model) => async (req, res, next) => {
     return next(err);
   }
 };
+const deleteAllDocs = (model) => async (req, res, next) => {
+  await model.deleteMany();
+  res.status(204).send('...')
+};
+
 module.exports = {
   getDocument,
   createDocument,
   updateDocument,
   deleteDocument,
   getAllDocuments,
+  deleteAllDocs,
 };

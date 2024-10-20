@@ -15,7 +15,13 @@ const documentsSchema = Schema(
       type: String,
       default: "user123",
     },
-    category: [{ type: Schema.ObjectId, ref: SectionModel }],
+    category: [
+      {
+        type: Schema.ObjectId,
+        ref: SectionModel,
+        required: [true, "category is required"],
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now(),

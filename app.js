@@ -26,12 +26,19 @@ mongoose
       console.log("db connection error: ", err);
     }
   });
+// app.use((req, res, next) => {
+//   res.set({
+//     "Access-Control-Allow-Origin": "*",
+//   });
+//   next();
+// });
 app.use(cookieParser());
-app.use(compression());
-
+// app.use(compression());
+app.use(cors({origin: "*"}));
 app.use("/", viewRouter);
 app.use("/api/documents", documentRoute);
 app.use("/api/sections", sectionRouter);
+app.use("/api/users", userRouter);
 
 app.all("*", (req, res, next) => {
   res.send("this route is not defined!");
@@ -47,7 +54,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log("app runing on port 5000");
+  console.log("app runing on port ", port);
 });
 // process.on("unhandledRejection", (err) => {
 //   server.close(err);
