@@ -10,12 +10,11 @@ const { join } = require("path");
 const compression = require("compression");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const viewRouter = require("./routes/viewRoute");
 dotenv.config();
-app.use(cors());
-
 const db = process.env.DB.replace("<db_password>", process.env.DB_PASSWORD);
 app.use(express.json());
-app.set("view engine", "ejs");
+app.set("view engine", "pug");
 app.set("views", join(__dirname, "public"));
 mongoose
   .connect(db)
@@ -27,21 +26,12 @@ mongoose
       console.log("db connection error: ", err);
     }
   });
-app.get("/", (req, res) => {
-  res.render("base", {
-    page: "home page",
-  });
-});
 app.use(cookieParser());
-app.use((req, res, next) => {
-  // console.log(res.cookie);
-  next();
-});
 app.use(compression());
 
-app.use("/api/users", userRouter);
-app.use("/api/documents/", documentRoute);
-app.use("/api/sections/", sectionRouter);
+app.use("/", viewRouter);
+app.use("/api/documents", documentRoute);
+app.use("/api/sections", sectionRouter);
 
 app.all("*", (req, res, next) => {
   res.send("this route is not defined!");

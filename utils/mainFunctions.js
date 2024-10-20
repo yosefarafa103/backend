@@ -6,7 +6,14 @@ const getDocument = (model) => async (req, res, next) => {
   // console.log(document);
   res.status(200).json(document);
 };
-
+const getAllDocuments = (model) => async (req, res, next) => {
+  try {
+    const docs = await model.find();
+    console.log(docs);
+  } catch (err) {
+    return next(err);
+  }
+};
 const createDocument = (model) => async (req, res, next) => {
   try {
     const newDocument = await model.create(req.body);
@@ -38,4 +45,5 @@ module.exports = {
   createDocument,
   updateDocument,
   deleteDocument,
+  getAllDocuments,
 };
